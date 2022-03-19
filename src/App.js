@@ -1,13 +1,61 @@
-import StudentCard from "./studentCard/studentCard.component";
-
+// import StudentCard from "./studentCard/studentCard.component";
+// import { CardList } from "./card-list/card-list.component";
+import { SearchBox } from "./search-box/search-box.component";
+import { StudentCard } from "./studentCard/studentCard.component";
 import "./App.css";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <StudentCard></StudentCard>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      students: [],
+      DataisLoaded: false,
+      searchField: "",
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://api.hatchways.io/assessment/students")
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log(json.students);
+        this.setState({
+          students: json.students,
+          DataisLoaded: true,
+        });
+      })
+      .catch((error) => {
+        console.error("error", error);
+      });
+  }
+
+  render() {
+    const { students, searchField } = this.state;
+    const filteredStudents = students.filter(
+      (student) =>
+        student.firstName.toLowerCase().includes(searchField.toLowerCase()) ||
+        student.lastName.toLowerCase().includes(searchField.toLowerCase())
+    );
+
+    return (
+      <div className="App">
+        <div className="student-container">
+          <SearchBox
+            placeholder="Search by name"
+            handleChange={(e) => this.setState({ searchField: e.target.value })}
+          />
+
+          {filteredStudents.map((student) => (
+            <StudentCard key={student.id} student={student} />
+          ))}
+        </div>
+
+        {/* <CardList students={filteredStudents}></CardList> */}
+      </div>
+    );
+  }
 }
 
 export default App;
