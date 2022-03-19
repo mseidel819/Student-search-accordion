@@ -4,8 +4,8 @@ import "./studentCard.style.css";
 
 export const StudentCard = (props) => {
   const [isActive, setIsActive] = React.useState(false);
-  const [tag, setTag] = React.useState([]);
 
+  // console.log(props);
   const initialValue = 0;
   const sumWithInitial = props.student.grades.reduce(
     (previousValue, currentValue) => +previousValue + +currentValue,
@@ -28,12 +28,8 @@ export const StudentCard = (props) => {
 
             <TagBox
               student={props.student}
-              tag={tag}
-              handleChange={(e, studentId) => {
-                if (e.key === "Enter")
-                  setTag([...tag, { studentId, value: e.target.value }]);
-                // console.log(tag, "hhh");
-              }}
+              tags={props.tags}
+              handleChange={props.handleChange}
             />
           </div>
         </div>

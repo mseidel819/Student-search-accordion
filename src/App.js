@@ -34,7 +34,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.students);
     const { students, searchField } = this.state;
     const filteredStudents = students.filter(
       (student) =>
@@ -52,7 +51,24 @@ class App extends React.Component {
 
           <div className="student-container">
             {filteredStudents.map((student) => {
-              return <StudentCard key={student.id} student={student} />;
+              return (
+                <StudentCard
+                  handleChange={(e) => {
+                    // console.log(e);
+                    if (e.key === "Enter")
+                      this.setState({
+                        tags: [
+                          ...this.state.tags,
+                          { studentId: student.id, value: e.target.value },
+                        ],
+                      });
+                    // console.log(tag, "hhh");
+                  }}
+                  key={student.id}
+                  student={student}
+                  tags={this.state.tags}
+                />
+              );
             })}
           </div>
         </div>

@@ -2,13 +2,18 @@ import React from "react";
 import "./tag-box.style.css";
 
 export const TagBox = (props) => {
-  console.log(props);
+  // console.log(props);
+
   return (
     <div>
-      {props.tag
+      {props.tags
         .filter((t) => t.studentId === props.student.id)
         .map((tag) => {
-          return <p className="student-tags">"{tag.value}"</p>;
+          return (
+            <p key={tag.studentId} className="student-tags">
+              {tag.value}
+            </p>
+          );
         })}
 
       <input
