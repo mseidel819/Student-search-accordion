@@ -32,6 +32,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.students);
     const { students, searchField } = this.state;
     const filteredStudents = students.filter(
       (student) =>
@@ -41,17 +42,18 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className="student-container">
+        <div className="app-container">
           <SearchBox
             placeholder="Search by name"
             handleChange={(e) => this.setState({ searchField: e.target.value })}
           />
 
-          {filteredStudents.map((student) => (
-            <StudentCard key={student.id} student={student} />
-          ))}
+          <div className="student-container">
+            {filteredStudents.map((student) => (
+              <StudentCard key={student.id} student={student} />
+            ))}
+          </div>
         </div>
-
         {/* <CardList students={filteredStudents}></CardList> */}
       </div>
     );

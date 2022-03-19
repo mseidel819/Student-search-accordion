@@ -1,11 +1,20 @@
 .App {
   margin: 0;
   padding: 0;
-  /* text-align: center; */
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #ddd;
   height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  background-color: #fff;
 }
