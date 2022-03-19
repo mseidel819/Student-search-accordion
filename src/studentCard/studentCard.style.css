@@ -49,6 +49,10 @@ h2 {
   margin: 10px 0;
   margin-left: 140px;
 }
+.test-grade {
+  display: flex;
+  gap: 20px;
+}
 
 .student-expander {
   font-size: 80px;

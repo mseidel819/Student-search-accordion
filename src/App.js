@@ -2,6 +2,7 @@
 // import { CardList } from "./card-list/card-list.component";
 import { SearchBox } from "./search-box/search-box.component";
 import { StudentCard } from "./studentCard/studentCard.component";
+
 import "./App.css";
 import React from "react";
 
@@ -13,6 +14,7 @@ class App extends React.Component {
       students: [],
       DataisLoaded: false,
       searchField: "",
+      tags: [],
     };
   }
 
@@ -49,9 +51,9 @@ class App extends React.Component {
           />
 
           <div className="student-container">
-            {filteredStudents.map((student) => (
-              <StudentCard key={student.id} student={student} />
-            ))}
+            {filteredStudents.map((student) => {
+              return <StudentCard key={student.id} student={student} />;
+            })}
           </div>
         </div>
         {/* <CardList students={filteredStudents}></CardList> */}
