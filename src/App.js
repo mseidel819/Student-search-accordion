@@ -36,14 +36,22 @@ class App extends React.Component {
   render() {
     const { students, searchField, tagField, tags } = this.state;
 
-    console.log(this.state);
+    // console.log(this.state);
 
     const filteredStudents = students.filter((student) => {
       const fullName = student.firstName + " " + student.lastName;
 
       if (student.tag) {
+        // return student.tag.map((tag) => {
+        //   tag.toLowerCase().includes(tagField.toLowerCase()) &&
+        //     fullName.toLowerCase().includes(searchField.toLowerCase());
+        // });
+
+        const bigTag = student.tag.join("");
+        console.log(bigTag);
         return (
-          student.tag.toLowerCase().includes(tagField.toLowerCase()) &&
+          // student.tag[0]
+          bigTag.toLowerCase().includes(tagField.toLowerCase()) &&
           fullName.toLowerCase().includes(searchField.toLowerCase())
         );
       }
@@ -80,7 +88,9 @@ class App extends React.Component {
                     if (e.key === "Enter") {
                       let students = [...this.state.students];
                       let student = { ...students[e.target.id - 1] };
-                      student.tag = e.target.value;
+                      student.tag = student.tag
+                        ? [...student.tag, e.target.value]
+                        : [e.target.value];
                       students[e.target.id - 1] = student;
                       this.setState({ students });
                       e.target.value = "";
