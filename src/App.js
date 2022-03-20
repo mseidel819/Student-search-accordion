@@ -1,5 +1,3 @@
-// import StudentCard from "./studentCard/studentCard.component";
-// import { CardList } from "./card-list/card-list.component";
 import { SearchBox } from "./search-box/search-box.component";
 import { StudentCard } from "./studentCard/studentCard.component";
 
@@ -22,7 +20,6 @@ class App extends React.Component {
     fetch("https://api.hatchways.io/assessment/students")
       .then((res) => res.json())
       .then((json) => {
-        // console.log(json.students);
         this.setState({
           students: json.students,
           DataisLoaded: true,
@@ -34,23 +31,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { students, searchField, tagField, tags } = this.state;
-
-    // console.log(this.state);
+    const { students, searchField, tagField } = this.state;
 
     const filteredStudents = students.filter((student) => {
       const fullName = student.firstName + " " + student.lastName;
 
       if (student.tag) {
-        // return student.tag.map((tag) => {
-        //   tag.toLowerCase().includes(tagField.toLowerCase()) &&
-        //     fullName.toLowerCase().includes(searchField.toLowerCase());
-        // });
-
         const bigTag = student.tag.join("");
         console.log(bigTag);
         return (
-          // student.tag[0]
           bigTag.toLowerCase().includes(tagField.toLowerCase()) &&
           fullName.toLowerCase().includes(searchField.toLowerCase())
         );
@@ -61,13 +50,6 @@ class App extends React.Component {
         );
       }
     });
-
-    // const filteredStudents = students.filter((student) => {
-    //   const fullName = student.firstName + " " + student.lastName;
-    //   // console.log(fullName);
-
-    //   return;
-    // });
 
     return (
       <div className="App">
@@ -104,7 +86,6 @@ class App extends React.Component {
             })}
           </div>
         </div>
-        {/* <CardList students={filteredStudents}></CardList> */}
       </div>
     );
   }

@@ -10,12 +10,8 @@
   font-weight: 400;
   font-family: "Raleway";
   width: 200px;
-  /* align-self: center; */
   margin-left: 12px;
-
   padding: 10px 0;
-  /* margin-left: 12px; */
-
   border-bottom: 1px solid #ddd;
   outline: 0;
 }

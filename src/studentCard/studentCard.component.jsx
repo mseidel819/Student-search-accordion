@@ -5,7 +5,6 @@ import "./studentCard.style.css";
 export const StudentCard = (props) => {
   const [isActive, setIsActive] = React.useState(false);
 
-  // console.log(props);
   const initialValue = 0;
   const sumWithInitial = props.student.grades.reduce(
     (previousValue, currentValue) => +previousValue + +currentValue,

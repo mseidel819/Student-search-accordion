@@ -2,8 +2,6 @@ import React from "react";
 import "./tag-box.style.css";
 
 export const TagBox = (props) => {
-  // console.log(props);
-
   return (
     <div className="tag-box">
       <div>
