@@ -14,6 +14,7 @@ class App extends React.Component {
       students: [],
       DataisLoaded: false,
       searchField: "",
+      tagField: "",
       tags: [],
     };
   }
@@ -34,12 +35,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { students, searchField } = this.state;
-    const filteredStudents = students.filter(
-      (student) =>
-        student.firstName.toLowerCase().includes(searchField.toLowerCase()) ||
-        student.lastName.toLowerCase().includes(searchField.toLowerCase())
-    );
+    const { students, searchField, tagField, tags } = this.state;
+
+    // console.log(this.state.tagField);
+
+    const filteredStudents = students.filter((student) => {
+      const fullName = student.firstName + " " + student.lastName;
+      // console.log(fullName);
+
+      return fullName.toLowerCase().includes(searchField.toLowerCase());
+    });
 
     return (
       <div className="App">
@@ -48,21 +53,43 @@ class App extends React.Component {
             placeholder="Search by name"
             handleChange={(e) => this.setState({ searchField: e.target.value })}
           />
-
+          <SearchBox
+            placeholder="Search by tag"
+            handleChange={(e) => this.setState({ tagField: e.target.value })}
+          />
           <div className="student-container">
             {filteredStudents.map((student) => {
               return (
                 <StudentCard
+                  // handleChange={(e) => {
+                  //   // console.log(e);
+                  //   if (e.key === "Enter") {
+                  //     this.setState({
+                  //       tags: [
+                  //         ...this.state.tags,
+                  //         { studentId: student.id, value: e.target.value },
+                  //       ],
+                  //     });
+                  //     e.target.value = "";
+                  //   }
+                  //   // console.log(tag, "hhh");
+                  // }}
+
                   handleChange={(e) => {
-                    // console.log(e);
-                    if (e.key === "Enter")
-                      this.setState({
-                        tags: [
-                          ...this.state.tags,
-                          { studentId: student.id, value: e.target.value },
-                        ],
-                      });
-                    // console.log(tag, "hhh");
+                    // console.log(e.target.id);
+                    if (e.key === "Enter") {
+                      // 1. Make a shallow copy of the items
+                      let students = [...this.state.students];
+                      // 2. Make a shallow copy of the item you want to mutate
+                      let student = { ...students[e.target.id - 1] };
+                      // 3. Replace the property you're intested in
+                      student.tag = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      students[e.target.id - 1] = student;
+                      // 5. Set the state to our new copy
+                      this.setState({ students });
+                      e.target.value = "";
+                    }
                   }}
                   key={student.id}
                   student={student}

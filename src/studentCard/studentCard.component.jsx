@@ -47,7 +47,7 @@ export const StudentCard = (props) => {
           <div className="grades">
             {props.student.grades.map((grade, index) => {
               return (
-                <div className="test-grade">
+                <div key={index} className="test-grade">
                   <p>Test {index + 1}:</p>
                   <p>{grade}&#37;</p>
                 </div>

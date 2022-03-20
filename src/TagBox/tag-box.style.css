@@ -1,0 +1,33 @@
+.tag-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tag-input {
+  border: none;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Raleway";
+  width: 200px;
+  /* align-self: center; */
+  margin-left: 12px;
+
+  padding: 10px 0;
+  /* margin-left: 12px; */
+
+  border-bottom: 1px solid #ddd;
+  outline: 0;
+}
+
+.tag-input:active,
+.tag-input:focus {
+  border-bottom: 1px solid #222;
+}
+
+.tag {
+  background-color: #ccc;
+  padding: 5px 8px;
+  display: inline-block;
+  border-radius: 5px;
+}
